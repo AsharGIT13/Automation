@@ -29,8 +29,6 @@ Route::get('/register_success',[supplier::class,'registration_success'])->name('
 Route::get('/register_failure',[supplier::class,'registration_fail'])->name('failure');
 Route::post('/adminpanel/userlogin',[Authcontroller::class,'userlogin'])->name('userlogin');
 
-
-
 Route::middleware('role')->group(function () {
     Route::get('/suppliers',[Supplier_Controller::class,'fetch_suppplier'])->name('supplier.list');
     Route::post('/suppliers/approve',[Supplier_Controller::class,'approve'])->name('supplier.approve');
