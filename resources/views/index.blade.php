@@ -139,7 +139,7 @@
                         </div>
                     </form>
                     <p class="loginhere">
-                        Have already an account ? <a href="#" class="loginhere-link">Login here</a>
+                        Have already an account ? <a href="{{route('Authentication')}}" class="loginhere-link">Login here</a>
                     </p>
                 </div>
             </div>

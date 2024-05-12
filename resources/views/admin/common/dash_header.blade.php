@@ -85,7 +85,7 @@
                                 <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="{{route('logout')}}"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Sign out</span></a>
+                                <a class="dropdown-item" href="{{route('logout')}}"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Sign out1</span></a>
                             </div>
                         </div>
 

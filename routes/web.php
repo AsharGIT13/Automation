@@ -6,6 +6,8 @@ use App\Http\Controllers\supplier;
 use App\Http\Controllers\Supplier_Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\MenuItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,7 @@ Route::post('/supplier_registration',[supplier::class,'supplier_register'])->nam
 Route::get('/register_success',[supplier::class,'registration_success'])->name('success');
 Route::get('/register_failure',[supplier::class,'registration_fail'])->name('failure');
 Route::post('/adminpanel/userlogin',[Authcontroller::class,'userlogin'])->name('userlogin');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('role')->group(function () {
     Route::get('/suppliers',[Supplier_Controller::class,'fetch_suppplier'])->name('supplier.list');
@@ -37,3 +40,20 @@ Route::middleware('role')->group(function () {
     Route::get('/adminpanel',[Admincontroller::class,'Homepage'])->name('dashboard');
     Route::get('/adminpanel/supplier',[Admincontroller::class,'suppliers'])->name('supplier_list');
 });
+
+// Route::resource('menus', 'MenuController');
+Route::get('/menu',[MenuController::class,'index'])->name('menus.menu_index');
+Route::get('/create',[MenuController::class,'create'])->name('menus.create');
+Route::post('/store',[MenuController::class,'store'])->name('menus.store');
+Route::get('/edit',[MenuController::class,'edit'])->name('menus.edit');
+Route::put('/update',[MenuController::class,'update'])->name('menus.update');
+Route::delete('/destroy',[MenuController::class,'destroy'])->name('menus.destroy');
+Route::resource('menu-items', MenuItemController::class);
+Route::get('/assign_menu_view',[MenuController::class,'assign_menu_view'])->name('assign_menu_view');
+Route::post('/assign_menu_store',[MenuController::class,'assign_menu_store'])->name('assign_menu_store');
+Route::get('/assigned-menus/{role}/edit', [MenuController::class, 'assign_menu_edit'])->name('assign_menu_edit');
+Route::put('/assigned-menus/{role}', [MenuController::class, 'assign_menu_update'])->name('assign_menu_update');
+Route::get('/get-assigned-menus/{role}', [MenuController::class, 'getAssignedMenus'])->name('get_assigned_menus');
+
+
+
