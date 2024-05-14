@@ -10,13 +10,23 @@ class Category_Controller extends Controller
    
     public function index()
     {
-        return view('admin.category');
+        $allcat = Category::all();
+        return view('admin.category',compact('allcat'));
     }
 
-   
-    public function create()
+    
+    public function fetch(Request $request)
     {
-        //
+      $categoryId = $request->input('category_id');
+
+      $category = Category::find($categoryId);
+  
+      if (!$category) {
+          return response()->json(['error' => 'Category not found'], 404);
+      }
+  
+
+      return response()->json($category);
     }
 
   
@@ -35,25 +45,20 @@ class Category_Controller extends Controller
     }
 
    
-    public function show($id)
-    {
-      
-    }
-
-   
-    public function edit($id)
-    {
-        //
-    }
 
    
     public function update(Request $request, $id)
     {
-        //
+     
+    $data=$request->all();
+    $cats= Category::find($id);
+    $cats->update($data);
+    return redirect()->route('category')->withMessage('Category Updated Successfully');
     }
 
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+       $category->delete();
+       return redirect()->route('category')->withMessage('Category Deleted Successfully');
     }
 }

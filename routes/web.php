@@ -62,4 +62,6 @@ Route::get('/get-assigned-menus/{role}', [MenuController::class, 'getAssignedMen
 
 Route::get('/category',[Category_Controller::class,'index'])->name('category');
 Route::post('/category_store',[Category_Controller::class,'store'])->name('category.store');
-
+Route::get('/category/fetch', [Category_Controller::class,'fetch'])->name('category.fetch');
+Route::post('/category/update/{id}', [Category_Controller::class,'update'])->name('category.update');
+Route::delete('/category/destroy/{category}', [Category_Controller::class,'destroy'])->name('category.destroy');

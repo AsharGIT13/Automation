@@ -1,6 +1,6 @@
     @include('admin.common.table_header');
     @include('admin.common.sidebar');
-
+   
     <div class="main-content">
 
         <div class="page-content">
@@ -44,11 +44,23 @@
                                     </thead>
 
                                      <tbody>
+                                     @foreach($allcat as $key => $cat)
 									 <tr>
-									    <td>1</td>
-									    <td>Electronics</td>
-									    <td><button>Delete</button></td>
+									    <td>{{$key+1}}</td>
+									    <td>{{$cat->category_name}}</td>
+									    <td>
+    <div class="btn-group" role="group" aria-label="Category Actions">
+        <button class="btn btn-primary editcat" dataid="{{$cat->id}}"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;
+        <form method="post" action="{{ route('category.destroy', $cat->id) }}">
+            @method('DELETE')
+            @csrf
+            <button class="btn btn-danger delbtn" type="button"><i class="fa fa-trash"></i></button>
+        </form>
+    </div>
+</td>
+
 									 </tr>
+                                     @endforeach
 									 </tbody>
                                     
                                 </table>
@@ -77,7 +89,7 @@
     <div class="offcanvas-body">
     <div class="card">
                     <div class="card-body">
-                        <form class="custom-validation" action="{{route('category.store')}}" method="post">
+                        <form class="custom-validation frm" action="{{route('category.store')}}" method="post">
                          @csrf    
                         <div class="mb-3">
                                 <label class="form-label">Category Name</label>
@@ -85,8 +97,12 @@
                             </div>  
                             <div>
                                 <div>
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                                    <button type="submit" id="sub" class="btn btn-primary waves-effect waves-light me-1">
                                         Submit
+                                    </button>
+
+                                    <button type="submit" id="update" class="btn btn-primary waves-effect waves-light me-1" style="display:none;">
+                                        Update
                                     </button>
                                 </div>
                             </div>
@@ -97,54 +113,50 @@
     </div>
 </div>
 
+
+
     @include('admin.common.dash_footer');
 
     <script>
-        $(document).ready(function() {
-            $('.approve-btn').click(function() {
-                var supplierId = $(this).data('supplier-id');
-                $.ajax({
-                    url: "{{ route('supplier.approve') }}",
-                    method: 'POST',
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        id: supplierId
-                    },
-                    success: function(response) {
-                        // Handle success response
-                        alert(response.message); // Show success message
-                        location.reload();
-                    },
-                    error: function(xhr) {
-                        // Handle error response
-                        console.log(xhr.responseText); // Log error message
-                        // You can show an error message to the user or handle the error as needed
-                    }
-                });
-            });
-
-            $('.denied-btn').click(function() {
-
-                var supplierId = $(this).data('supplier-id');
-                // Make an AJAX request to the approval route
-                $.ajax({
-                    url: "{{ route('supplier.denied') }}",
-                    method: 'POST',
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        id: supplierId
-                    },
-                    success: function(response) {
-                        // Handle success response
-                        alert(response.message);
-                        location.reload();
-                    },
-                    error: function(xhr) {
-                        // Handle error response
-                        console.log(xhr.responseText); // Log error message
-                        // You can show an error message to the user or handle the error as needed
-                    }
-                });
-            });
+       $(document).ready(function() {
+       $('.editcat').click(function() {
+        var categoryId = $(this).attr('dataid');
+        $.ajax({
+            type: "GET",
+            url: "{{ route('category.fetch') }}",
+            data: {
+                category_id: categoryId,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+              $("#sub").hide(); 
+              $("#update").show(); 
+              var categoryId = response.id; 
+              $('.frm').attr('action', '{{ route("category.update", ":id") }}'.replace(':id', categoryId));
+              $('#offcanvasRight input[name="category_name"]').val(response.category_name);
+              $('#offcanvasRight').offcanvas('show'); 
+              
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                alert("Failed to fetch category data.");
+            }
         });
+    });
+});
+
+$(document).ready(function() {
+    $('.delbtn').click(function(e) {
+        e.preventDefault(); // Prevent default form submission
+        
+        // Prompt confirmation message
+        if (confirm("Are you sure you want to delete this category?")) {
+            // If user confirms, submit the form
+            $(this).closest('form').submit();
+        }
+    });
+});
+
     </script>
+
+    
