@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admincontroller;
 use App\Http\Controllers\Authcontroller;
+use App\Http\Controllers\Category_Controller;
 use App\Http\Controllers\supplier;
 use App\Http\Controllers\Supplier_Controller;
 use Illuminate\Support\Facades\Auth;
@@ -48,12 +49,17 @@ Route::post('/store',[MenuController::class,'store'])->name('menus.store');
 Route::get('/edit',[MenuController::class,'edit'])->name('menus.edit');
 Route::put('/update',[MenuController::class,'update'])->name('menus.update');
 Route::delete('/destroy',[MenuController::class,'destroy'])->name('menus.destroy');
+
 Route::resource('menu-items', MenuItemController::class);
+
 Route::get('/assign_menu_view',[MenuController::class,'assign_menu_view'])->name('assign_menu_view');
 Route::post('/assign_menu_store',[MenuController::class,'assign_menu_store'])->name('assign_menu_store');
 Route::get('/assigned-menus/{role}/edit', [MenuController::class, 'assign_menu_edit'])->name('assign_menu_edit');
 Route::put('/assigned-menus/{role}', [MenuController::class, 'assign_menu_update'])->name('assign_menu_update');
 Route::get('/get-assigned-menus/{role}', [MenuController::class, 'getAssignedMenus'])->name('get_assigned_menus');
 
+//Category Routes
 
+Route::get('/category',[Category_Controller::class,'index'])->name('category');
+Route::post('/category_store',[Category_Controller::class,'store'])->name('category.store');
 
