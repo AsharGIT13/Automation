@@ -1,6 +1,6 @@
     @include('admin.common.table_header');
     @include('admin.common.sidebar');
-   
+    
     <div class="main-content">
 
         <div class="page-content">

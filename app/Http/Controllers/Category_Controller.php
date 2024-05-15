@@ -18,14 +18,10 @@ class Category_Controller extends Controller
     public function fetch(Request $request)
     {
       $categoryId = $request->input('category_id');
-
       $category = Category::find($categoryId);
-  
       if (!$category) {
           return response()->json(['error' => 'Category not found'], 404);
       }
-  
-
       return response()->json($category);
     }
 

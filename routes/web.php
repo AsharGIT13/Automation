@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MenuItemController;
+use App\Http\Controllers\SubcategoryContrller;
+use App\Models\Subcategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,3 +76,10 @@ Route::post('/brand_store',[BrandController::class,'store'])->name('brand.store'
 Route::get('/brand/fetch', [BrandController::class,'fetch'])->name('brand.fetch');
 Route::post('/brand/update/{id}', [BrandController::class,'update'])->name('brand.update');
 Route::delete('/brand/destroy/{brand}', [BrandController::class,'destroy'])->name('brand.destroy');
+
+//Subcategory Routes
+Route::get('/subcat',[SubcategoryContrller::class,'index'])->name('subcategory');
+Route::post('/subcat_store',[SubcategoryContrller::class,'store'])->name('subcategory.store');
+Route::post('/subcat/update/{id}', [SubcategoryContrller::class,'update'])->name('subcategory.update');
+Route::delete('/subcat/destroy/{subcat}', [SubcategoryContrller::class,'destroy'])->name('subcategory.destroy');
+Route::get('/subcat/fetch', [SubcategoryContrller::class,'fetch'])->name('subcategory.fetch');

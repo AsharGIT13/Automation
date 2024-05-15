@@ -54,8 +54,7 @@ class BrandController extends Controller
     $cats->update($data);
     return redirect()->route('brand')->withMessage('Brand Updated Successfully');
     }
-
-    public function destroy(Brand $brand)
+     public function destroy(Brand $brand)
     {
        $brand->update(['status' => '1']);
        return redirect()->route('brand')->withMessage('Brand Deleted Successfully');
