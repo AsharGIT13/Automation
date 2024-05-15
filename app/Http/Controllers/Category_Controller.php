@@ -10,7 +10,7 @@ class Category_Controller extends Controller
    
     public function index()
     {
-        $allcat = Category::all();
+        $allcat = Category::where('status', 0)->get();
         return view('admin.category',compact('allcat'));
     }
 
@@ -29,11 +29,11 @@ class Category_Controller extends Controller
       return response()->json($category);
     }
 
-  
+    
     public function store(Request $request)
     {
       $request->validate([
-        'category_name' => 'required |unique:categories,category_name'
+        'category_name' => 'required|unique:categories,category_name,NULL,id,status,0'
       ],[
         'category_name.unique' => 'Category name Alreday Exist!'
       ]
@@ -58,7 +58,8 @@ class Category_Controller extends Controller
 
     public function destroy(Category $category)
     {
-       $category->delete();
+       $category->update(['status' => '1']);
        return redirect()->route('category')->withMessage('Category Deleted Successfully');
+
     }
 }

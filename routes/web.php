@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admincontroller;
 use App\Http\Controllers\Authcontroller;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Category_Controller;
 use App\Http\Controllers\supplier;
 use App\Http\Controllers\Supplier_Controller;
@@ -65,3 +66,11 @@ Route::post('/category_store',[Category_Controller::class,'store'])->name('categ
 Route::get('/category/fetch', [Category_Controller::class,'fetch'])->name('category.fetch');
 Route::post('/category/update/{id}', [Category_Controller::class,'update'])->name('category.update');
 Route::delete('/category/destroy/{category}', [Category_Controller::class,'destroy'])->name('category.destroy');
+
+//Brand Routes
+
+Route::get('/brand',[BrandController::class,'index'])->name('brand');
+Route::post('/brand_store',[BrandController::class,'store'])->name('brand.store');
+Route::get('/brand/fetch', [BrandController::class,'fetch'])->name('brand.fetch');
+Route::post('/brand/update/{id}', [BrandController::class,'update'])->name('brand.update');
+Route::delete('/brand/destroy/{brand}', [BrandController::class,'destroy'])->name('brand.destroy');
