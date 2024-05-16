@@ -16,10 +16,10 @@ class SubcategoryContrller extends Controller
     public function index()
     {
         $allsubcat = Subcategory::where('status', 0)->get();
-        $categories = Category::all();
+        $categories = Category::where('status', 0)->get();
 
         $categories1 = Category::with('sub_category')->get()->toArray();
-        dd($categories1);
+        // dd($categories1);
         // $sub_cat = $categories1->sub_category();
         return view('admin.subcategory', compact('categories', 'allsubcat'));
     }

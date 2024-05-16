@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function index()
     {
+
+      
         return view('products.index');
     }
 
@@ -90,6 +95,9 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('products.create');
+        $categoriesdata = Category::where('status', 0)->get();
+        $subcategoriesdata = Subcategory::where('status', 0)->get();
+        $branddata = Brand::where('status', 0)->get();
+        return view('products.create',compact('categoriesdata','subcategoriesdata','branddata'));
     }
 }

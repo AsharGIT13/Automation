@@ -4,6 +4,15 @@
     float: right !important;
 }
 
+.form-label{
+	font-weight:bold;
+}
+
+
+.form-control{
+	border: 1px solid #f4b5b5 !important;
+}
+
 #page-topbar {
 	position: fixed;
 	top: 0;
