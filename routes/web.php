@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MenuItemController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryContrller;
 use App\Models\Subcategory;
 
@@ -83,3 +84,8 @@ Route::post('/subcat_store',[SubcategoryContrller::class,'store'])->name('subcat
 Route::post('/subcat/update/{id}', [SubcategoryContrller::class,'update'])->name('subcategory.update');
 Route::delete('/subcat/destroy/{subcat}', [SubcategoryContrller::class,'destroy'])->name('subcategory.destroy');
 Route::get('/subcat/fetch', [SubcategoryContrller::class,'fetch'])->name('subcategory.fetch');
+
+//Products Routes
+Route::get('/product',[ProductController::class,'index'])->name('product');
+Route::post('/get_product_list',[ProductController::class,'get_product_list'])->name('get_product_list');
+Route::get('/create_product',[ProductController::class,'create'])->name('product.create');

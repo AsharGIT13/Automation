@@ -22,9 +22,6 @@ class Authcontroller extends Controller
       'password' => 'required',
     ]);
 
-    // Debugging line, remove it once done debugging
-    // dd($request);
-
     $credentials = $request->only('email', 'password');
 
     if (Auth::attempt($credentials)) {
@@ -33,7 +30,11 @@ class Authcontroller extends Controller
       if ($user->approved_status == 1) {
         $users = User::find($user->id);
         $userdata = User::find($user->role_type);
-        $assigned_menus = Role::with('menus','menuItems')->where('id', $user->role_type)->get();
+        if ($user->role_type != 1)
+          $assigned_menus = Role::with('menus', 'menuItems')->where('id', $user->role_type)->get();
+        else
+          $assigned_menus = Role::with('menus', 'menuItems')->get();
+
         Session::put('assigned_menus', $assigned_menus[0]);
         return redirect()->route('dashboard');
       } else {
@@ -42,7 +43,6 @@ class Authcontroller extends Controller
       }
     }
 
-    dd("login failure");
   }
 
   public function logout()
