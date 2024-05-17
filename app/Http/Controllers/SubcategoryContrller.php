@@ -19,9 +19,9 @@ class SubcategoryContrller extends Controller
         $categories = Category::where('status', 0)->get();
 
         $categories1 = Category::with('sub_category')->get()->toArray();
-        // dd($categories1);
-        // $sub_cat = $categories1->sub_category();
-        return view('admin.subcategory', compact('categories', 'allsubcat'));
+        $sub_cat = $categories1;
+        //dd($sub_cat);
+        return view('admin.subcategory', compact('categories', 'allsubcat', 'categories1'));
     }
 
     public function fetch(Request $request)
