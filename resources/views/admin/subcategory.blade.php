@@ -93,7 +93,7 @@
                          @csrf    
                          <div class="mb-3">
                             <label class="form-label"><b>Category</b></label>
-                                <select class="form-select" name="category" id="category">
+                                <select class="form-select" name="category_id" id="category">
                                     <option value="">Select Category</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->category_name }}</option>
@@ -145,7 +145,7 @@
               var categoryId = response.id; 
               $('.frm').attr('action', '{{ route("subcategory.update", ":id") }}'.replace(':id', categoryId));
               $('#offcanvasRight input[name="subcategory_name"]').val(response.subcategory_name);
-              $('#offcanvasRight select[name="category"]').val(response.category);
+              $('#offcanvasRight select[name="category_id"]').val(response.category_id);
               $('#offcanvasRight').offcanvas('show'); 
               
             },

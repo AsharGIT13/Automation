@@ -41,7 +41,7 @@ Route::middleware('role')->group(function () {
     Route::get('/suppliers',[Supplier_Controller::class,'fetch_suppplier'])->name('supplier.list');
     Route::post('/suppliers/approve',[Supplier_Controller::class,'approve'])->name('supplier.approve');
     Route::post('/suppliers/denied',[Supplier_Controller::class,'denied'])->name('supplier.denied');
-    Route::get('/adminpanel/logout',[Authcontroller::class,'logout'])->name('logout');
+    // Route::get('/adminpanel/logout',[Authcontroller::class,'logout'])->name('admin_logout');
     Route::get('/adminpanel',[Admincontroller::class,'Homepage'])->name('dashboard');
     Route::get('/adminpanel/supplier',[Admincontroller::class,'suppliers'])->name('supplier_list');
 });
@@ -89,3 +89,10 @@ Route::get('/subcat/fetch', [SubcategoryContrller::class,'fetch'])->name('subcat
 Route::get('/product',[ProductController::class,'index'])->name('product');
 Route::post('/get_product_list',[ProductController::class,'get_product_list'])->name('get_product_list');
 Route::get('/create_product',[ProductController::class,'create'])->name('product.create');
+Route::post('/store_product',[ProductController::class,'store_product'])->name('store_product');
+Route::post('/get_subcat',[ProductController::class,'get_subcat'])->name('get_subcat');
+Route::get('edit_product',[ProductController::class, 'edit_product'])->name('edit_product');
+Route::get('delete_product',[ProductController::class, 'delete_product'])->name('delete_product');
+Route::get('/download',[ProductController::class,  'download'])->name('download');
+Route::post('/update_products',[ProductController::class,'update_products'])->name('update_products');
+

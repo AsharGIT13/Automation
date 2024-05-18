@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-flex align-items-center justify-content-between">
-                        <h4 class="mb-0">Add Product</h4>
+                        <h4 class="mb-0">Edit Product</h4>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="toast position-absolute top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true" id="toastPlacement" data-delay="2000" data-original-class="toast-container position-absolute p-3">
+                            <div class="toast position-absolute top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true" id="toastPlacement" data-delay="2000" data-original-class="toast-container position-absolute p-3" style="z-index: 999;">
                                 <div class="toast-header">
                                     <strong class="me-auto">Alert</strong>
                                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -31,13 +31,14 @@
                                     <span id="toast_msg"></span>
                                 </div>
                             </div>
-                            <form class="custom-validation" action="#" id="form-data">
+                            <form class="custom-validation" action="#" id="form-data" style="z-index: 1;">
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <input type="hidden" id="id" name="id" value="{{$data->id}}">
                                         <div class="mb-3">
                                             <label for="formrow-text-input" class="form-label" id="">Name</label>
                                             &nbsp;&nbsp;<span style="font-size: 70%; color: red; vertical-align: top;">&starf;</span>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Type Product Name">
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Type Product Name" value="{{$data->name}}">
                                             <span class="text-danger" id="name_error"></span>
                                         </div>
                                     </div>
@@ -48,8 +49,8 @@
                                             &nbsp;&nbsp;<span style="font-size: 70%; color: red; vertical-align: top;">&starf;</span>
                                             <select class="form-control select2 brand" id="brand" name="brand" style="width: 100%;">
                                                 <option value="">Select Brand</option>
-                                                @foreach($branddata as $brand)
-                                                <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                                                @foreach($brands as $brand)
+                                                <option value="{{ $brand->id }}" {{$brand->id == $data->brand_id ? 'selected' : '' }}>{{ $brand->brand_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -63,8 +64,8 @@
 
                                             <select class="form-control select2 category" id="category" name="category" style="width: 100%;">
                                                 <option value="">Select Category</option>
-                                                @foreach($categoriesdata as $category)
-                                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                                @foreach($categories as $category)
+                                                <option value="{{ $category->id }}" {{$category->id == $data->category_id ? 'selected' : '' }}>{{ $category->category_name }}</option>
                                                 @endforeach
                                             </select>
 
@@ -77,6 +78,9 @@
                                             &nbsp;&nbsp;<span style="font-size: 70%; color: red; vertical-align: top;">&starf;</span>
                                             <select class="form-control select2 subcategory" id="subcategory" name="subcategory" style="width: 100%;">
                                                 <option value="">Select Sub Category</option>
+                                                @foreach($subcategories as $subcategory)
+                                                <option value="{{ $subcategory->id }}" {{$subcategory->id == $data->sub_category_id ? 'selected' : '' }}>{{ $subcategory->subcategory_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -87,7 +91,7 @@
                                                 <div class="mb-3">
                                                     <label for="formrow-text-input" class="form-label" id="">Price</label>
                                                     &nbsp;&nbsp;<span style="font-size: 70%; color: red; vertical-align: top;">&starf;</span>
-                                                    <input type="text" class="form-control" id="price" name="price" placeholder="Type Product Price">
+                                                    <input type="text" class="form-control" id="price" name="price" placeholder="Type Product Price" value="{{$data->price}}">
                                                     <span class="text-danger" id="name_error"></span>
                                                 </div>
                                             </div>
@@ -95,7 +99,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="formrow-text-input" class="form-label" id="">Weight</label>
-                                                    <input type="text" class="form-control" id="weight" name="weight" placeholder="Type Product Weight">
+                                                    <input type="text" class="form-control" id="weight" name="weight" placeholder="Type Product Weight" value="{{$data->weight}}">
                                                     <span class="text-danger" id="name_error"></span>
                                                 </div>
                                             </div>
@@ -107,7 +111,7 @@
                                                 <div class="form-group">
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label">Description</label>
-                                                        <textarea class="textarea" name="description" placeholder="" style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                                                        <textarea class="textarea" name="description" id="description" value="{{$data->description}}" placeholder="" style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
 
 												</textarea>
                                                     </div>
@@ -121,7 +125,7 @@
                                                 <div class="form-group">
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label">Specification</label>
-                                                        <textarea class="textarea" name="specification" placeholder="Place some text here" style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                                                        <textarea class="textarea" name="specification" id="specification" value="{{$data->specification}}" placeholder="Place some text here" style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
 												</textarea>
                                                     </div>
 
@@ -130,9 +134,17 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="mb-3">
+                                            <div class="mb-2">
                                                 <label class="form-label">Product Image</label>
                                                 <input type="file" class="form-control" required placeholder="" id="proimage" name="proimage" />
+                                                <input type="hidden" id="proimage_filename" value="{{$data->product_images}}">
+                                            </div>
+                                            <div class="mb-1">
+                                                @if ($fileInputs['product_images'] != NULL || $fileInputs['product_images'] != "")
+                                                <i class="fas fa-cloud-download-alt"> <a href="{{ route('download', ['filename' => basename($fileInputs['product_images'])]) }}">Download Image</a></i>
+                                                @else
+                                                <span>No file selected</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div>
@@ -168,7 +180,7 @@
 <script>
     $(document).ready(function() {
 
-        CaregoryList();
+        // CaregoryList();
 
         function CaregoryList() {
             var token = "{{ csrf_token() }}";
@@ -218,7 +230,10 @@
                 ['view', ['undo', 'redo', 'fullscreen', 'codeview', 'help']]
             ]
         });
-
+        var specification = "{{$data->specification}}"; // Assuming $data->specification contains HTML content
+        $('#specification').summernote('code', specification);
+        var description = "{{$data->description}}"; // Assuming $data->specification contains HTML content
+        $('#description').summernote('code', description);
     });
     $(document).on('change', '#category', function() {
         var category_id = $(this).val();
@@ -265,12 +280,14 @@
 
         if (proimage.files.length > 0) {
             formData.append('proimage', proimage.files[0]);
+        } else {
+            formData.append('proimage_filename', $('#proimage_filename').val());
         }
 
         $.ajax({
             type: 'POST',
             data: formData,
-            url: "{{ route('store_product') }}",
+            url: "{{ route('update_products') }}",
             headers: {
                 'X-CSRF-TOKEN': token
             },
@@ -290,7 +307,6 @@
                     $("#submit_btn_product_add").hide();
                     toast_msg = $('#toast_msg').html(response.message);
                     $('.toast').toast('show');
-                    window.location.href('/product');
                 } else if (response.success == false) {
                     $('#submit_btn_product_add').html('Submit');
                     toast_msg = $('#toast_msg').html(response.message);

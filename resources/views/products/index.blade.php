@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-flex align-items-center justify-content-between">
-                        <h4 class="mb-0">Driver List</h4>
+                        <h4 class="mb-0">Product List</h4>
 
                         <div class="page-title-right">
                             <a href="{{ route('product.create') }}" class="btn btn-primary mb-2">Add New Product</a>
@@ -31,10 +31,12 @@
                                     <tr>
                                         <th>S No</th>
                                         <th>Name</th>
-                                        <th>Mobile No</th>
-                                        <th>Email</th>
-                                        <th>State</th>
-                                        <th>City</th>
+                                        <th>Brand</th>
+                                        <th>Category</th>
+                                        <th>SubCategory</th>
+                                        <th>Price</th>
+                                        <th>Weight</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -74,20 +76,28 @@
                         name: 'product_name'
                     },
                     {
-                        data: 'product_weight',
-                        name: 'product_weight'
+                        data: 'brand_name',
+                        name: 'brand_name'
+                    },
+                    {
+                        data: 'category_name',
+                        name: 'category_name'
+                    },
+                    {
+                        data: 'subcategory_name',
+                        name: 'subcategory_name'
                     },
                     {
                         data: 'product_price',
                         name: 'product_price'
+                    }, 
+                    {
+                        data: 'product_weight',
+                        name: 'product_weight'
                     },
                     {
-                        data: 'product_description',
-                        name: 'product_description'
-                    },
-                    {
-                        data: 'product_specification',
-                        name: 'product_specification'
+                        data: 'action',
+                        name: 'action'
                     }
                 ]
             });

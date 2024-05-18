@@ -38,7 +38,7 @@ class SubcategoryContrller extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category' => 'required',
+            'category_id' => 'required',
             'subcategory_name' => 'required|unique:subcategories,subcategory_name,NULL,id,status,0',
         ]);
 
