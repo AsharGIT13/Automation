@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameColumnInTable extends Migration
+class AddColumnUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class RenameColumnInTable extends Migration
      */
     public function up()
     {
-        Schema::table('subcategories', function (Blueprint $table) {
-            $table->renameColumn('category', 'category_id');
+        Schema::table('users', function (Blueprint $table) {
+            $table->bigInteger('mobile_no')->nullable()->after('email');
         });
     }
 
@@ -25,8 +25,7 @@ class RenameColumnInTable extends Migration
      */
     public function down()
     {
-        Schema::table('subcategories', function (Blueprint $table) {
-            $table->renameColumn('category_id', 'category');
+        Schema::table('users', function (Blueprint $table) {
         });
     }
 }

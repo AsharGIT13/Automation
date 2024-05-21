@@ -12,6 +12,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryContrller;
+use App\Http\Controllers\UserController;
 use App\Models\Subcategory;
 
 /*
@@ -96,3 +97,11 @@ Route::get('delete_product',[ProductController::class, 'delete_product'])->name(
 Route::get('/download',[ProductController::class,  'download'])->name('download');
 Route::post('/update_products',[ProductController::class,'update_products'])->name('update_products');
 
+
+
+Route::resource('user', UserController::class);
+Route::controller(UserController::class)->group(function () {
+    Route::get('role_list', 'role_list')->name('role_list');
+    Route::post('user_update', 'user_update')->name('user_update');
+    Route::get('delete_user', 'destroy')->name('delete_user');
+});

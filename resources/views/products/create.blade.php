@@ -240,11 +240,11 @@
             success: function(response) {
                 if (response.success == true) {
                     var array = response.data;
-                    console.log(array);
+
                     var select_class = $("#subcategory");
                     select_class.empty();
                     select_class.append(
-                        "<option value='' disabled selected>Select Subcat</option>"
+                        "<option value='' disabled selected>Select Sub Category</option>"
                     );
                     if (array != '') {
                         for (i in array) {
@@ -290,7 +290,7 @@
                     $("#submit_btn_product_add").hide();
                     toast_msg = $('#toast_msg').html(response.message);
                     $('.toast').toast('show');
-                    window.location.href('/product');
+                    window.location.href = "{{route('product') }}";
                 } else if (response.success == false) {
                     $('#submit_btn_product_add').html('Submit');
                     toast_msg = $('#toast_msg').html(response.message);
