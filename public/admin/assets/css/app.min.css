@@ -4615,7 +4615,10 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before {
 }
 
 .authentication-bg {
-	background-color: rgba(91, 140, 232, .25)
+	background-image: url('/admin/assets/images/auth-bg.png');
+	background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center;
 }
 
 .authentication-bg .auth-logo .logo {

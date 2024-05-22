@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="utf-8" />
-        <title>Login | Minible - Admin & Dashboard Template</title>
+        <title>Login | Au2omation</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -26,9 +26,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center">
-                            <a href="index.html" class="mb-5 d-block auth-logo">
-                                <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="22" class="logo logo-dark">
-                                <img src="{{asset('admin/assets/images/logo-light.png')}}" alt="" height="22" class="logo logo-light">
+                            <a href="{{route('Authentication')}}" class="mb-5 d-block auth-logo">
+                                <img src="{{asset('admin/assets/images/logo.png')}}" alt="" height="122" class="logo logo-dark">
+                                <img src="{{asset('admin/assets/images/logo.png')}}" alt="" height="122" class="logo logo-light">
                             </a>
                         </div>
                     </div>
