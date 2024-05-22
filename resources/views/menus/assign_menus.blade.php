@@ -1,5 +1,22 @@
 @include('admin.common.table_header');
 @include('admin.common.sidebar');
+
+<style>
+    .menu-container{
+        background-color: #fff;
+        padding:20px;
+    }
+    .form-check-input{
+        border: 1px solid #000;
+    }
+    .submenu{
+        margin-top:15px;
+    }
+    .mainmenu{
+        border-bottom:1px dotted #000;
+        padding-top:20px;
+    }
+</style>
 <div class="main-content">
 
     <div class="page-content">
@@ -34,24 +51,26 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top:50px;">
                         <h4>Menus:</h4>
+                        <div class="menu-container">
                         @foreach($menus as $menu)
-                        <div class="form-check">
+                        <div class="form-check mainmenu">
                             <input type="checkbox" name="menus[]" value="{{ $menu->id }}" class="form-check-input menu-checkbox" id="menu_{{ $menu->id }}">
-                            <label class="form-check-label" for="menu_{{ $menu->id }}">{{ $menu->name }}</label>
+                            <label class="form-check-label" for="menu_{{ $menu->id }}"><b>{{ $menu->name }}</b></label>
                         </div>
-                        <ul>
+                        <ul class="list-inline submenu">
                             @foreach($menu->menuItems as $menuItem)
-                            <li>
+                            <li class="list-inline-item">
                                 <input type="checkbox" name="menu_items[]" value="{{ $menuItem->id }}" class="form-check-input menu-checkbox" id="menu_item_{{ $menuItem->id }}">
                                 <label class="form-check-label" for="menu_item_{{ $menuItem->id }}">{{ $menuItem->name }}</label>
-                            </li>
+                            </li class="list-inline-item">
                             @endforeach
                         </ul>
                         @endforeach
                     </div>
-                    <button type="submit" class="btn btn-primary">Assign</button>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-top:50px;">Assign</button>
                 </form>
             </div>
         </div>
