@@ -130,11 +130,57 @@
                                         </div>
 
                                         <div class="row">
+                                        <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Product Image</label>
                                                 <input type="file" class="form-control" required placeholder="" id="proimage" name="proimage" />
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Quantity</label>
+                                                <input type="number" class="form-control" required placeholder="" id="qty" name="quantity" />
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                        <div id="show-item">
+                                        <label class="form-label">Additional Information ( <span style="color:#b98d8d"> Part No,
+Type of Product,size of the product,Pressure Type,Current Consumption,Electrical Design,Special Features,Output Type etc.,</span> )</label>
+                                        <div class="row">
+                                            <div class="mb-3 col-md-4">
+                                                <input type="text" class="form-control"  placeholder="Enter Particulars" id="" name="particulars[]" />
+                                            </div>
+                                            <div class="mb-4 col-md-4">
+                                                <input type="text" class="form-control"  placeholder="Enter Value" id="" name="parval[]" />
+                                            </div>
+
+                                            <div class="mb-4 col-md-4">
+                                            <button type="button" class="add_items btn btn-primary waves-effect waves-light me-1" id="add-btn">
+                                                    + Add Item
+                                                </button>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                        <div id="discount-item">
+                                        <label class="form-label">Bulk Quantity Discount</label>
+                                        <div class="row">
+                                            <div class="mb-3 col-md-4">
+                                                <input type="text" class="form-control"  placeholder="Enter Maximum Quantity" id="" name="discount_qty[]" />
+                                            </div>
+                                            <div class="mb-4 col-md-4">
+                                                <input type="text" class="form-control"  placeholder="Enter Discount Percentage (%)" id="" name="discount_percent[]" />
+                                            </div>
+
+                                            <div class="mb-4 col-md-4">
+                                            <button type="button" class="add_items_dis btn btn-primary waves-effect waves-light me-1">
+                                                    + Add Item
+                                                </button>
+                                            </div>
+                                        </div>
+                                        </div>
+
                                         <div>
                                             <div>
                                                 <button type="submit" class="submit_btn_product_add btn btn-primary waves-effect waves-light me-1">
@@ -314,4 +360,56 @@
             }
         });
     });
+
+    $(document).ready(function() {
+    $(".add_items").click(function(e) {
+        e.preventDefault();
+        $('#show-item').append(`<div class="row">
+            <div class="mb-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Enter Particulars" name="particulars[]"/>
+            </div>
+            <div class="mb-4 col-md-4">
+                <input type="text" class="form-control" placeholder="Enter Value" name="parval[]" />
+            </div>
+            <div class="mb-4 col-md-4">
+                <button type="button" class="remove_items_btn btn btn-danger waves-effect waves-light me-1" id="add-btn">
+                    - Remove Item
+                </button>
+            </div>
+        </div>`);
+    });
+  
+    $(document).on('click', '.remove_items_btn', function(e) {
+    e.preventDefault();
+    var row_item = $(this).closest('.row'); 
+    $(row_item).remove();
+}); 
+});
+
+
+$(document).ready(function() {
+    $(".add_items_dis").click(function(e) {
+        e.preventDefault();
+        $('#discount-item').append(`<div class="row">
+                                            <div class="mb-3 col-md-4">
+                                                <input type="text" class="form-control"  placeholder="Enter Maximum Quantity" id="" name="discount_qty[]" />
+                                            </div>
+                                            <div class="mb-4 col-md-4">
+                                                <input type="text" class="form-control"  placeholder="Enter Discount Percentage (%)" id="" name="discount_percent[]" />
+                                            </div>
+
+                                            <div class="mb-4 col-md-4">
+                                            <button type="button" class="remove_items_dis btn btn-danger waves-effect waves-light me-1">
+                                                    - Remove Item
+                                                </button>
+                                            </div>
+                                        </div>`);
+    });
+  
+    $(document).on('click', '.remove_items_dis', function(e) {
+    e.preventDefault();
+    var dis_item = $(this).closest('.row'); 
+    $(dis_item).remove();
+}); 
+});
 </script>
