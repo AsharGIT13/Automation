@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="mt-5 text-center">
-                            <p>© <script>document.write(new Date().getFullYear())</script> Au2omation.</p>
+                            <p style="color:#fff">© <script>document.write(new Date().getFullYear())</script> Au2omation.</p>
                         </div>
 
                     </div>
