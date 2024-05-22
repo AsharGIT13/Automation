@@ -17,8 +17,8 @@
         padding-top:20px;
     }
 </style>
-<div class="main-content">
 
+<div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
 
