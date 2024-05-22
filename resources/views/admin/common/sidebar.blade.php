@@ -115,39 +115,30 @@
                                 </ul>
                             </li>
                             @endif
+                            @if(session()->has('assigned_menus'))
                             @php
                             $assigned_menus = session()->get('assigned_menus');
-                            $lastMenuName = null;
                             @endphp
 
                             @if(!empty($assigned_menus))
-                            @foreach($assigned_menus->menus as $menu)
-                            @if($menu->name !== $lastMenuName)
+                            @foreach($assigned_menus as $menuId => $menuItems)
+                            @php
+                            $menu = $menuItems->first()->menu;
+                            @endphp
                             <li class="menu-title">{{ $menu->name }}</li>
-                            @php $lastMenuName = $menu->name; $lastMenuName = null; @endphp
-                            @endif
                             <li>
-
-                                @if($menu->name !== $lastMenuName)
-                                <a href="javascript:void(0);" class="has-arrow waves-effect">
+                                <a href="javascript:void(0);" class="has-arrow waves-effect ParentMenu">
                                     <i class="uil-store"></i>
                                     <span>{{ $menu->name }}</span>
                                 </a>
-                                @php $lastMenuName = $menu->name; @endphp
-                                @endif
                                 <ul class="sub-menu" aria-expanded="false">
-                                    @php $lastMenuItemName = null; @endphp
-                                    @foreach($assigned_menus->menuItems as $menuItem)
-                                    @if($menuItem->menu_id === $menu->id)
-                                    @if($menuItem->name !== $lastMenuItemName)
+                                    @foreach($menuItems as $menuItem)
                                     <li><a href="{{ $menuItem->url }}">{{ $menuItem->name }}</a></li>
-                                    @php $lastMenuItemName = $menuItem->name; @endphp
-                                    @endif
-                                    @endif
                                     @endforeach
                                 </ul>
                             </li>
                             @endforeach
+                            @endif
                             @endif
                             <!-- <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">

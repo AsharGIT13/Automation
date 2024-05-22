@@ -307,6 +307,7 @@
                     $("#submit_btn_product_add").hide();
                     toast_msg = $('#toast_msg').html(response.message);
                     $('.toast').toast('show');
+                    window.location.href = "{{route('product') }}";
                 } else if (response.success == false) {
                     $('#submit_btn_product_add').html('Submit');
                     toast_msg = $('#toast_msg').html(response.message);

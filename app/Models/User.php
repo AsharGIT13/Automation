@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'mobile_no',
     ];
 
     /**
@@ -44,6 +45,11 @@ class User extends Authenticatable
     ];
 
     public function roles() {
-        return $this->hasMany(Role::class);
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function rights()
+    {
+        return $this->hasMany('App\Models\Right');
     }
 }
