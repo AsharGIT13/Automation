@@ -22,7 +22,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="toast position-absolute top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true" id="toastPlacement" data-delay="2000" data-original-class="toast-container position-absolute p-3">
+                            <div class="toast position-absolute top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true" id="toastPlacement" data-delay="2000" data-original-class="toast-container position-absolute p-3" style="z-index:9999 !important;position:fixed">
                                 <div class="toast-header">
                                     <strong class="me-auto">Alert</strong>
                                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -187,7 +187,7 @@
                         var select_class = $("#state");
                         select_class.empty();
                         select_class.append(
-                            "<option value='' disabled selected>Select Caregory</option>"
+                            "<option value='' disabled selected>Select Category</option>"
                         );
                         if (array != '') {
                             for (i in array) {
